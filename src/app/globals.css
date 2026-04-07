@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafbfc;
+  --foreground: #0b0f1a;
+  --muted: #64748b;
+  --card: rgba(255, 255, 255, 0.72);
+  --border: rgba(15, 23, 42, 0.08);
+  --ring: rgba(99, 102, 241, 0.45);
+  --primary: #1e1b4b;
+  --primary-foreground: #f8fafc;
+  --accent-start: #6366f1;
+  --accent-end: #a855f7;
+  --glow: rgba(99, 102, 241, 0.35);
+  --mesh-1: rgba(99, 102, 241, 0.15);
+  --mesh-2: rgba(168, 85, 247, 0.12);
+  --mesh-3: rgba(59, 130, 246, 0.1);
+}
+
+.dark {
+  --background: #030712;
+  --foreground: #f1f5f9;
+  --muted: #94a3b8;
+  --card: rgba(15, 23, 42, 0.55);
+  --border: rgba(148, 163, 184, 0.12);
+  --ring: rgba(129, 140, 248, 0.5);
+  --primary: #e0e7ff;
+  --primary-foreground: #0f172a;
+  --accent-start: #818cf8;
+  --accent-end: #c084fc;
+  --glow: rgba(129, 140, 248, 0.25);
+  --mesh-1: rgba(99, 102, 241, 0.22);
+  --mesh-2: rgba(168, 85, 247, 0.18);
+  --mesh-3: rgba(59, 130, 246, 0.15);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent-start: var(--accent-start);
+  --color-accent-end: var(--accent-end);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --shadow-glass: 0 8px 32px rgba(15, 23, 42, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  --shadow-glass-dark: 0 8px 32px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  --shadow-soft: 0 24px 80px -20px rgba(99, 102, 241, 0.25);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent-start) 35%, transparent);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@utility glass {
+  background: var(--card);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-glass);
+}
+
+.dark .glass {
+  box-shadow: var(--shadow-glass-dark);
+}
+
+@utility gradient-text {
+  background: linear-gradient(
+    135deg,
+    var(--accent-start),
+    var(--accent-end)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility neo-inset {
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.06),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.7);
+}
+
+.dark .neo-inset {
+  box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.35),
+    inset -1px -1px 6px rgba(255, 255, 255, 0.04);
+}
