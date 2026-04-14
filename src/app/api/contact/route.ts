@@ -1,4 +1,3 @@
-import { addSubmission } from "@/lib/contact-storage";
 import { contactSchema } from "@/lib/contact";
 import { NextResponse } from "next/server";
 
@@ -7,7 +6,8 @@ export async function POST(request: Request) {
     const json = (await request.json()) as unknown;
     const values = contactSchema.parse(json);
 
-    await addSubmission(values);
+    // Placeholder: forward to CRM, email, or your Laravel API in production.
+    // console.log("WaniaSol contact lead:", values);
 
     return NextResponse.json(
       { ok: true, message: "Lead received" },
