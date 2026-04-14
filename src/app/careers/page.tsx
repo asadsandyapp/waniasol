@@ -1,9 +1,7 @@
 import { Reveal } from "@/components/animations/reveal";
 import { Button } from "@/components/ui/button";
-import { openRoles } from "@/lib/careers-data";
 import { site } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { MapPin, Briefcase } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -12,9 +10,9 @@ export const metadata: Metadata = {
 
 export default function CareersPage() {
   return (
-    <div className="pb-20 sm:pb-28">
-      <section className="border-b border-border/60 bg-foreground/[0.02] py-16 dark:bg-white/[0.02] sm:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div className="pb-12 sm:pb-16">
+      <section className="border-b border-border/60 bg-foreground/[0.02] py-10 dark:bg-white/[0.02] sm:py-12">
+        <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-5">
           <Reveal>
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold tracking-tight sm:text-5xl">
               Build with <span className="gradient-text">exceptional peers</span>
@@ -28,7 +26,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <section className="mx-auto max-w-7xl px-3 py-8 sm:px-4 lg:px-5 lg:py-12">
         <Reveal>
           <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold">
             Culture
@@ -50,65 +48,56 @@ export default function CareersPage() {
           </ul>
         </Reveal>
 
-        <div className="mt-16">
+        <div className="mt-8">
           <Reveal>
             <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold">
-              Open positions
+              Current openings
             </h2>
             <p className="mt-2 text-muted">
-              Don’t see a fit? Email{" "}
+              There are no open positions right now. We still welcome strong profiles for future roles.
+            </p>
+          </Reveal>
+          <Reveal delay={0.04}>
+            <div className="mt-4 rounded-2xl border border-border/70 bg-card/45 p-6 shadow-[0_10px_40px_-28px_rgba(0,0,0,0.35)] backdrop-blur-sm">
+              <p className="text-sm text-muted">
+                Want to be considered first when roles reopen? Email{" "}
               <a
                 href={`mailto:careers@${site.email.split("@")[1]}`}
-                className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+                className="font-medium text-foreground underline-offset-4 hover:underline"
               >
                 careers@{site.email.split("@")[1]}
               </a>{" "}
-              with your portfolio.
+                with your resume, portfolio, and areas of expertise.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="mt-4 text-sm text-muted">
+              For project inquiries, use{" "}
+              <a
+                href="/contact"
+                className="font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                our contact page
+              </a>
+              .
             </p>
           </Reveal>
-          <ul className="mt-8 space-y-4">
-            {openRoles.map((job, i) => (
-              <Reveal key={job.id} delay={i * 0.04}>
-                <li className="glass flex flex-col gap-4 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="font-[family-name:var(--font-display)] text-lg font-semibold">
-                      {job.title}
-                    </p>
-                    <div className="mt-2 flex flex-wrap gap-4 text-sm text-muted">
-                      <span className="inline-flex items-center gap-1.5">
-                        <Briefcase className="h-4 w-4" aria-hidden />
-                        {job.department}
-                      </span>
-                      <span className="inline-flex items-center gap-1.5">
-                        <MapPin className="h-4 w-4" aria-hidden />
-                        {job.location}
-                      </span>
-                      <span>{job.type}</span>
-                    </div>
-                  </div>
-                  <Button href="/contact" variant="outline">
-                    Apply
-                  </Button>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-5">
         <Reveal>
           <div className="glass rounded-3xl p-8 text-center sm:p-12">
             <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold">
-              Hiring spotlight
+              Talent network
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-muted">
-              We’re expanding our platform engineering and AI practices. Senior
-              practitioners thrive here—ownership end-to-end, from design docs
-              to production metrics.
+              Share your profile once and we’ll reach out when a role aligns with
+              your experience in product engineering, platform, or AI delivery.
             </p>
-            <Button href="/contact" variant="primary" className="mt-8">
-              Introduce yourself
+            <Button href="/contact" variant="primary" className="mt-4">
+              Join talent network
             </Button>
           </div>
         </Reveal>

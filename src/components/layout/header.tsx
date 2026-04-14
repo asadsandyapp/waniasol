@@ -1,8 +1,8 @@
 "use client";
 
+import { BrandLogo } from "@/components/layout/brand-logo";
 import { site, navLinks } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -15,52 +15,57 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/75 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-black/[0.08] bg-white/90 shadow-[0_1px_0_0_rgba(0,0,0,0.04)] backdrop-blur-xl dark:border-white/[0.08] dark:bg-[#0a0a0a]/92 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.04)]">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-foreground focus:px-4 focus:py-2 focus:text-background"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-1 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-foreground focus:px-2 focus:py-2 focus:text-background"
       >
         Skip to content
       </a>
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="relative flex min-h-[3.25rem] w-full items-center overflow-visible py-2 pl-3 pr-3 sm:pl-4 sm:pr-4 lg:pl-5 lg:pr-5">
         <Link
           href="/"
-          className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight"
+          className="relative z-10 ml-2.5 inline-flex shrink-0 items-center gap-2 overflow-visible rounded-xl py-1 sm:ml-3.5"
+          aria-label={`${site.name} home`}
         >
-          <span className="gradient-text">{site.name}</span>
+          <BrandLogo priority />
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
-          {navLinks.map((link) => {
-            const active =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                  active
-                    ? "text-foreground"
-                    : "text-muted hover:text-foreground",
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
+        <div className="absolute left-1/2 top-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-2 md:flex">
+          <nav className="flex items-center gap-1" aria-label="Main">
+            {navLinks.map((link) => {
+              const active =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold tracking-tight transition-colors",
+                    active
+                      ? "bg-black/[0.07] text-black dark:bg-white/12 dark:text-white"
+                      : "text-neutral-600 hover:bg-black/[0.05] hover:text-black dark:text-neutral-400 dark:hover:bg-white/[0.06] dark:hover:text-white",
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
+          <span className="ml-1.5 inline-flex shrink-0">
+            <ThemeToggle />
+          </span>
+        </div>
 
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <Button href="/contact" variant="primary" className="hidden sm:inline-flex">
-            Get Started
-          </Button>
+        <div className="relative z-10 ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
+          <span className="inline-flex md:hidden">
+            <ThemeToggle />
+          </span>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card/60 md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-black/12 bg-white/90 text-black shadow-sm md:hidden dark:border-white/15 dark:bg-white/5 dark:text-white"
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
             aria-controls="mobile-nav"
@@ -82,26 +87,19 @@ export function Header() {
             className="border-t border-border bg-background/95 backdrop-blur-xl md:hidden"
           >
             <nav
-              className="flex flex-col gap-1 px-4 py-4"
+              className="flex flex-col gap-0.5 px-0.5 py-3 sm:px-1"
               aria-label="Mobile"
             >
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="rounded-lg px-3 py-3 text-base font-medium text-foreground hover:bg-foreground/5"
+                  className="rounded-lg px-3 py-2.5 text-base font-medium text-black hover:bg-black/5 dark:text-white dark:hover:bg-white/10"
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Button
-                href="/contact"
-                variant="primary"
-                className="mt-2 w-full justify-center"
-              >
-                Get Started
-              </Button>
             </nav>
           </motion.div>
         )}

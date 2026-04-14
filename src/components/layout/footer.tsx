@@ -1,3 +1,4 @@
+import { BrandLogo } from "@/components/layout/brand-logo";
 import { IconGithub, IconLinkedIn, IconX } from "@/components/icons/social";
 import { footerColumns, site } from "@/lib/site-config";
 import Link from "next/link";
@@ -10,14 +11,18 @@ const icons = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-foreground/[0.02] dark:bg-black/20">
-      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
-          <div className="lg:col-span-2">
-            <Link href="/" className="font-[family-name:var(--font-display)] text-xl font-bold">
-              <span className="gradient-text">{site.name}</span>
+    <footer className="overflow-visible border-t border-border bg-foreground/[0.02] dark:bg-black/20">
+      <div className="mx-auto max-w-7xl px-0.5 py-7 sm:px-1 lg:px-1.5">
+        <div className="grid gap-5 overflow-visible md:grid-cols-2 lg:grid-cols-5">
+          <div className="overflow-visible lg:col-span-2">
+            <Link
+              href="/"
+              className="inline-flex max-w-full overflow-visible"
+              aria-label={`${site.name} home`}
+            >
+              <BrandLogo size="footer" />
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
+            <p className="mt-6 max-w-sm text-base leading-relaxed text-muted">
               {site.tagline}. Engineering excellence for teams that ship at
               global scale.
             </p>
@@ -46,7 +51,7 @@ export function Footer() {
               <p className="font-[family-name:var(--font-display)] text-sm font-semibold text-foreground">
                 {col.title}
               </p>
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-4 space-y-2">
                 {col.links.map((l) => (
                   <li key={l.href}>
                     <Link
@@ -61,11 +66,11 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-6 flex flex-col gap-3 border-t border-border pt-4 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-wrap gap-3">
             <Link href="/contact" className="hover:text-foreground">
               Privacy
             </Link>

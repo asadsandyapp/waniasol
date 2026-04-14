@@ -1,37 +1,36 @@
 @import "tailwindcss";
 
+/* Match next-themes: only treat as dark when <html class="dark"> — NOT
+   prefers-color-scheme. Otherwise OS dark + app "light" still applies dark: utilities. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #fafbfc;
-  --foreground: #0b0f1a;
-  --muted: #64748b;
-  --card: rgba(255, 255, 255, 0.72);
-  --border: rgba(15, 23, 42, 0.08);
-  --ring: rgba(99, 102, 241, 0.45);
-  --primary: #1e1b4b;
-  --primary-foreground: #f8fafc;
-  --accent-start: #6366f1;
-  --accent-end: #a855f7;
-  --glow: rgba(99, 102, 241, 0.35);
-  --mesh-1: rgba(99, 102, 241, 0.15);
-  --mesh-2: rgba(168, 85, 247, 0.12);
-  --mesh-3: rgba(59, 130, 246, 0.1);
+  --background: #fafafa;
+  --foreground: #000000;
+  --muted: #525252;
+  --card: rgba(255, 255, 255, 0.85);
+  --border: rgba(0, 0, 0, 0.1);
+  --ring: rgba(0, 0, 0, 0.35);
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --mesh-1: rgba(0, 0, 0, 0.06);
+  --mesh-2: rgba(0, 0, 0, 0.04);
+  --mesh-3: rgba(0, 0, 0, 0.03);
 }
 
 .dark {
-  --background: #030712;
-  --foreground: #f1f5f9;
-  --muted: #94a3b8;
-  --card: rgba(15, 23, 42, 0.55);
-  --border: rgba(148, 163, 184, 0.12);
-  --ring: rgba(129, 140, 248, 0.5);
-  --primary: #e0e7ff;
-  --primary-foreground: #0f172a;
-  --accent-start: #818cf8;
-  --accent-end: #c084fc;
-  --glow: rgba(129, 140, 248, 0.25);
-  --mesh-1: rgba(99, 102, 241, 0.22);
-  --mesh-2: rgba(168, 85, 247, 0.18);
-  --mesh-3: rgba(59, 130, 246, 0.15);
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  /* Warm neutral gray — avoids cool “blue-grey” read on dark UI */
+  --muted: #d4d4d4;
+  --card: rgba(23, 23, 23, 0.65);
+  --border: rgba(255, 255, 255, 0.12);
+  --ring: rgba(255, 255, 255, 0.45);
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --mesh-1: rgba(255, 255, 255, 0.07);
+  --mesh-2: rgba(255, 255, 255, 0.05);
+  --mesh-3: rgba(255, 255, 255, 0.04);
 }
 
 @theme inline {
@@ -43,15 +42,17 @@
   --color-ring: var(--ring);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-accent-start: var(--accent-start);
-  --color-accent-end: var(--accent-end);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
-  --shadow-glass: 0 8px 32px rgba(15, 23, 42, 0.08),
-    0 1px 0 rgba(255, 255, 255, 0.5) inset;
-  --shadow-glass-dark: 0 8px 32px rgba(0, 0, 0, 0.35),
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.06),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  --shadow-glass-dark: 0 8px 32px rgba(0, 0, 0, 0.45),
     0 1px 0 rgba(255, 255, 255, 0.06) inset;
-  --shadow-soft: 0 24px 80px -20px rgba(99, 102, 241, 0.25);
+  --shadow-soft: 0 24px 80px -24px rgba(0, 0, 0, 0.2);
+}
+
+.dark {
+  --shadow-soft: 0 24px 80px -24px rgba(0, 0, 0, 0.5);
 }
 
 @layer base {
@@ -63,29 +64,97 @@
     html {
       scroll-behavior: auto;
     }
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
+    /* Intentionally do NOT blanket-disable animations/transitions on *.
+       That pattern breaks real motion (CSS keyframes, Framer, marquees).
+       Prefer component-level checks via matchMedia / hooks instead. */
   }
 
   body {
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
+    font-size: 1.0625rem; /* ~17px — slightly larger body copy */
+    line-height: 1.6;
+    letter-spacing: -0.011em;
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--accent-start) 35%, transparent);
+    background: color-mix(in oklab, var(--foreground) 18%, transparent);
     color: var(--foreground);
   }
 
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
+  }
+}
+
+/* Optional caret blink when TypewriterText uses showCursor (opacity set in JS). */
+@layer components {
+  @keyframes typewriter-caret-blink {
+    0%,
+    100% {
+      opacity: 0.85;
+    }
+    50% {
+      opacity: 0.12;
+    }
+  }
+
+  .typewriter-caret {
+    opacity: 0;
+    animation: typewriter-caret-blink 0.75s ease-in-out infinite;
+  }
+
+  @keyframes logo-chip-float {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-4px);
+    }
+  }
+
+  .logo-chip {
+    animation: logo-chip-float 2.6s ease-in-out infinite alternate;
+  }
+
+  @keyframes stat-float {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-3px);
+    }
+  }
+
+  .stat-float {
+    animation: stat-float 2.8s ease-in-out infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-chip,
+    .stat-float {
+      animation: none;
+      transform: none;
+    }
+  }
+
+  .logo-marquee-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
   }
 }
 
@@ -101,15 +170,9 @@
   box-shadow: var(--shadow-glass-dark);
 }
 
+/* Emphasis text: solid theme color (no blue gradient) */
 @utility gradient-text {
-  background: linear-gradient(
-    135deg,
-    var(--accent-start),
-    var(--accent-end)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--foreground);
 }
 
 @utility neo-inset {

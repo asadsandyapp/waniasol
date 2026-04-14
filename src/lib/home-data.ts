@@ -8,12 +8,12 @@ import {
 } from "lucide-react";
 
 export const trustedLogos = [
-  "Northwind",
-  "Globex",
-  "Acme Corp",
-  "Stark Industries",
-  "Umbrella",
-  "Wayne Ent.",
+  "Meridian Capital",
+  "Atlas Commerce",
+  "Nova Health Systems",
+  "Summit FinTech",
+  "Harbor Logistics",
+  "Vertex Retail Group",
 ] as const;
 
 export const serviceCards = [
@@ -52,36 +52,6 @@ export const serviceCards = [
     description:
       "Developer experience, internal tooling, and reliability programs.",
     icon: Cpu,
-  },
-] as const;
-
-export const casePreview = [
-  {
-    slug: "fintech-scale",
-    title: "Global payments rail modernization",
-    industry: "FinTech",
-    metric: "42%",
-    metricLabel: "latency reduction",
-    summary:
-      "Rebuilt core transaction services with event-driven architecture.",
-  },
-  {
-    slug: "healthcare-platform",
-    title: "HIPAA-ready patient platform",
-    industry: "Healthcare",
-    metric: "3.2×",
-    metricLabel: "faster releases",
-    summary:
-      "Shipped a secure patient portal with audit trails and integrations.",
-  },
-  {
-    slug: "retail-omni",
-    title: "Omnichannel retail engine",
-    industry: "Retail",
-    metric: "28%",
-    metricLabel: "conversion lift",
-    summary:
-      "Unified inventory and checkout across web, mobile, and in-store.",
   },
 ] as const;
 
@@ -146,8 +116,24 @@ export const techStack = [
 ] as const;
 
 export const stats = [
-  { value: 120, suffix: "+", label: "Products shipped" },
-  { value: 15, suffix: "", label: "Countries served" },
-  { value: 98, suffix: "%", label: "Client retention" },
-  { value: 8, suffix: "+", label: "Years of excellence" },
+  {
+    value: 72,
+    suffix: "+",
+    label: "Products & platforms shipped",
+  },
+  {
+    value: 18,
+    suffix: "",
+    label: "Countries & regions served",
+  },
+  {
+    value: 94,
+    suffix: "%",
+    label: "Average client retention",
+  },
+  {
+    value: 10,
+    suffix: "+",
+    label: "Years of engineering excellence",
+  },
 ] as const;

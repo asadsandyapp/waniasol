@@ -1,4 +1,3 @@
-import { CaseStudiesPreview } from "@/components/home/case-studies-preview";
 import { CtaBanner } from "@/components/home/cta-banner";
 import { Hero } from "@/components/home/hero";
 import { Process } from "@/components/home/process";
@@ -27,7 +26,6 @@ export default function HomePage() {
       <TrustedBy />
       <StatsBar />
       <ServicesPreview />
-      <CaseStudiesPreview />
       <Process />
       <Testimonials />
       <TechStack />

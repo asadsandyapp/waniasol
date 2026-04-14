@@ -3,8 +3,8 @@ import { Reveal } from "@/components/animations/reveal";
 
 export function Process() {
   return (
-    <section className="py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section className="py-10 sm:py-14">
+      <div className="mx-auto max-w-7xl px-0.5 sm:px-1 lg:px-1.5">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
             A process you can <span className="gradient-text">trust</span>
@@ -14,7 +14,7 @@ export function Process() {
             every step.
           </p>
         </Reveal>
-        <ol className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((p, i) => (
             <Reveal key={p.step} delay={i * 0.06}>
               <li className="relative">

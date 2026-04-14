@@ -18,7 +18,7 @@ export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/case-studies", label: "Case Studies" },
+  { href: "/product", label: "Product" },
   { href: "/careers", label: "Careers" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
@@ -46,7 +46,7 @@ export const footerColumns = [
   {
     title: "Resources",
     links: [
-      { href: "/case-studies", label: "Case Studies" },
+      { href: "/product", label: "Real Estate CRM" },
       { href: "/blog", label: "Insights" },
       { href: "/contact", label: "Start a Project" },
     ],

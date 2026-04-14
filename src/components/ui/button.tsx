@@ -6,13 +6,13 @@ type Variant = "primary" | "secondary" | "ghost" | "outline";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-gradient-to-r from-[var(--accent-start)] to-[var(--accent-end)] text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:brightness-105 active:scale-[0.98]",
+    "bg-black text-white shadow-md hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 active:scale-[0.98]",
   secondary:
-    "bg-foreground text-background hover:bg-foreground/90 active:scale-[0.98] dark:bg-white dark:text-slate-950",
+    "bg-black text-white hover:bg-black/90 active:scale-[0.98] dark:bg-white dark:text-black dark:hover:bg-white/90",
   ghost:
-    "bg-transparent text-foreground hover:bg-foreground/5 active:bg-foreground/10",
+    "bg-transparent text-black hover:bg-black/5 active:bg-black/10 dark:text-white dark:hover:bg-white/10 dark:active:bg-white/15",
   outline:
-    "border border-border bg-card/50 text-foreground hover:bg-card hover:border-foreground/15",
+    "border border-black/20 bg-white/80 text-black hover:bg-neutral-50 hover:border-black/30 dark:border-white/35 dark:bg-transparent dark:text-white dark:hover:border-white/50 dark:hover:bg-white/5",
 };
 
 export function Button({
@@ -20,6 +20,7 @@ export function Button({
   variant = "primary",
   children,
   href,
+  type,
   ...props
 }: ComponentProps<"button"> & {
   variant?: Variant;
@@ -41,7 +42,7 @@ export function Button({
   }
 
   return (
-    <button type="button" className={classes} {...props}>
+    <button type={type ?? "button"} className={classes} {...props}>
       {children}
     </button>
   );
