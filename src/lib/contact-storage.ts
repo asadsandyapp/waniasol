@@ -6,6 +6,33 @@ const MAX_SUBMISSIONS = 200;
 
 export type StoredSubmission = { id: string; receivedAt: string } & ContactFormValues;
 
+/**
+ * Upstash may return each list element as a string *or* an already-parsed object.
+ * Calling JSON.parse on a non-string coerces to "[object Object]" and throws.
+ */
+function parseStoredEntry(entry: unknown): StoredSubmission | null {
+  if (entry != null && typeof entry === "object" && !Array.isArray(entry)) {
+    const o = entry as Record<string, unknown>;
+    if (typeof o.id === "string" && typeof o.email === "string") {
+      return entry as StoredSubmission;
+    }
+  }
+  if (typeof entry === "string") {
+    try {
+      const parsed: unknown = JSON.parse(entry);
+      if (parsed != null && typeof parsed === "object" && !Array.isArray(parsed)) {
+        const o = parsed as Record<string, unknown>;
+        if (typeof o.id === "string" && typeof o.email === "string") {
+          return parsed as StoredSubmission;
+        }
+      }
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
 function getRedis(): Redis | null {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -56,7 +83,9 @@ export async function getSubmissions(): Promise<StoredSubmission[]> {
   const redis = getRedis();
   if (redis) {
     const raw = await redis.lrange(LIST_KEY, 0, MAX_SUBMISSIONS - 1);
-    return raw.map((s) => JSON.parse(s as string) as StoredSubmission);
+    return raw
+      .map((entry) => parseStoredEntry(entry))
+      .filter((x): x is StoredSubmission => x !== null);
   }
 
   if (process.env.NODE_ENV === "development") {
