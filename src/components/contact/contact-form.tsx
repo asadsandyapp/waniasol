@@ -56,7 +56,7 @@ export function ContactForm() {
       name: "",
       email: "",
       phone: "",
-      projectType: "Real Estate CRM",
+      projectType: "Real Estate Management & Sales CRM",
       businessGoals: "",
       expectedTimeline: "Short term (1-3 months)",
       engagementModel: "Discovery + Delivery",
@@ -192,8 +192,12 @@ export function ContactForm() {
                       aria-invalid={!!errors.projectType}
                       {...register("projectType")}
                     >
-                      <option>Real Estate CRM</option>
+                      <option>Real Estate Management & Sales CRM</option>
                       <option>SaaS Product</option>
+                      <option>AI & Data Solutions</option>
+                      <option>DevOps & Cloud</option>
+                      <option>AI Agentic Solutions</option>
+                      <option>Vibe Coding</option>
                       <option>Custom Software</option>
                       <option>Web Development</option>
                       <option>Mobile App</option>
