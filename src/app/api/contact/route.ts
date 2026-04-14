@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const values = contactSchema.parse(json);
 
     // Placeholder: forward to CRM, email, or your Laravel API in production.
-    console.log("WaniaSol contact lead:", values);
+    // console.log("WaniaSol contact lead:", values);
 
     return NextResponse.json(
       { ok: true, message: "Lead received" },

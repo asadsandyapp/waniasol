@@ -3,7 +3,7 @@ import { Header } from "@/components/layout/header";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { organizationJsonLd } from "@/lib/json-ld-data";
 import { site } from "@/lib/site-config";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { Inter, Poppins } from "next/font/google";
 import Script from "next/script";
@@ -91,7 +91,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </ThemeProvider>
-        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
