@@ -15,9 +15,6 @@
 /test-results
 /playwright-report
 
-# local contact form storage (dev only)
-/data/submissions.jsonl
-
 # next.js
 /.next/
 /out/
