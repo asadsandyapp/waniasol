@@ -18,6 +18,7 @@ export default function NotFound() {
       </Button>
       <Link
         href="/contact"
+        prefetch={false}
         className="mt-4 text-sm font-semibold text-foreground underline-offset-4 hover:underline"
       >
         Contact support

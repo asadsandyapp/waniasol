@@ -17,6 +17,7 @@ export function Footer() {
           <div className="overflow-visible lg:col-span-2">
             <Link
               href="/"
+              prefetch={false}
               className="inline-flex max-w-full overflow-visible"
               aria-label={`${site.name} home`}
             >
@@ -56,6 +57,7 @@ export function Footer() {
                   <li key={l.href}>
                     <Link
                       href={l.href}
+                      prefetch={false}
                       className="text-sm text-muted transition hover:text-foreground"
                     >
                       {l.label}
@@ -71,10 +73,10 @@ export function Footer() {
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/contact" className="hover:text-foreground">
+            <Link href="/contact" prefetch={false} className="hover:text-foreground">
               Privacy
             </Link>
-            <Link href="/contact" className="hover:text-foreground">
+            <Link href="/contact" prefetch={false} className="hover:text-foreground">
               Terms
             </Link>
           </div>

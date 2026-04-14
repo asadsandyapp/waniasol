@@ -25,6 +25,7 @@ export function Header() {
       <div className="relative flex min-h-[3.25rem] w-full items-center overflow-visible py-2 pl-3 pr-3 sm:pl-4 sm:pr-4 lg:pl-5 lg:pr-5">
         <Link
           href="/"
+          prefetch={false}
           className="relative z-10 ml-2.5 inline-flex shrink-0 items-center gap-2 overflow-visible rounded-xl py-1 sm:ml-3.5"
           aria-label={`${site.name} home`}
         >
@@ -42,6 +43,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  prefetch={false}
                   className={cn(
                     "whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold tracking-tight transition-colors",
                     active
@@ -94,6 +96,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  prefetch={false}
                   className="rounded-lg px-3 py-2.5 text-base font-medium text-black hover:bg-black/5 dark:text-white dark:hover:bg-white/10"
                   onClick={() => setOpen(false)}
                 >

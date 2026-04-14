@@ -38,7 +38,11 @@ export default function BlogPage() {
               Featured · {featured.category} · {featured.readTime}
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
-              <Link href={`/blog/${featured.slug}`} className="transition hover:opacity-80">
+              <Link
+                href={`/blog/${featured.slug}`}
+                prefetch={false}
+                className="transition hover:opacity-80"
+              >
                 {featured.title}
               </Link>
             </h2>
@@ -67,7 +71,11 @@ export default function BlogPage() {
                     {post.category} · {post.readTime}
                   </p>
                   <h2 className="mt-3 font-[family-name:var(--font-display)] text-2xl font-bold leading-tight">
-                    <Link href={`/blog/${post.slug}`} className="transition hover:opacity-80">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      prefetch={false}
+                      className="transition hover:opacity-80"
+                    >
                       {post.title}
                     </Link>
                   </h2>

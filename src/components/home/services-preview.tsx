@@ -31,6 +31,7 @@ export function ServicesPreview() {
                 >
                   <Link
                     href="/services"
+                    prefetch={false}
                     className="glass neo-inset flex h-full flex-col rounded-2xl p-6 transition hover:border-foreground/15 hover:shadow-soft"
                   >
                     <div className="flex items-start justify-between gap-4">

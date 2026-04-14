@@ -121,6 +121,7 @@ export function ContactForm() {
               <p className="mt-3 text-sm leading-relaxed text-muted">
                 <Link
                   href="/product"
+                  prefetch={false}
                   className="inline-flex items-center rounded-lg border border-border bg-card/60 px-3 py-1.5 text-xs font-semibold text-foreground transition hover:bg-card"
                 >
                   Product overview

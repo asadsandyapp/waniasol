@@ -69,6 +69,7 @@ export default async function BlogPostPage({ params }: Props) {
         <Reveal>
           <Link
             href="/blog"
+            prefetch={false}
             className="mt-5 inline-flex text-sm font-semibold text-foreground underline-offset-4 hover:underline"
           >
             ← Back to all articles

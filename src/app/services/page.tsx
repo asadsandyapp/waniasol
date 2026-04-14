@@ -122,6 +122,7 @@ export default function ServicesPage() {
             Need a tailored scope or RFP response?{" "}
             <Link
               href="/contact"
+              prefetch={false}
               className="font-semibold text-foreground underline-offset-4 hover:underline"
             >
               Contact our team
