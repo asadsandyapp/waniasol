@@ -17,12 +17,26 @@ export function useReducedMotionHydrationSafe(): boolean {
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setPrefersReduced(mq.matches);
-    mq.addEventListener("change", update);
-    queueMicrotask(() => {
+
+    // Older mobile Safari only supports addListener/removeListener.
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", update);
+    } else if (typeof mq.addListener === "function") {
+      mq.addListener(update);
+    }
+
+    Promise.resolve().then(() => {
       setMounted(true);
       update();
     });
-    return () => mq.removeEventListener("change", update);
+
+    return () => {
+      if (typeof mq.removeEventListener === "function") {
+        mq.removeEventListener("change", update);
+      } else if (typeof mq.removeListener === "function") {
+        mq.removeListener(update);
+      }
+    };
   }, []);
 
   return mounted && prefersReduced;
