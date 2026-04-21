@@ -31,17 +31,22 @@ export function TypewriterText({
 
   useEffect(() => {
     if (chars.length === 0) {
-      queueMicrotask(() => setVisible(0));
+      Promise.resolve().then(() => setVisible(0));
+      return;
+    }
+
+    if (typeof window.matchMedia !== "function") {
+      Promise.resolve().then(() => setVisible(chars.length));
       return;
     }
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mq.matches) {
-      queueMicrotask(() => setVisible(chars.length));
+      Promise.resolve().then(() => setVisible(chars.length));
       return;
     }
 
-    queueMicrotask(() => setVisible(0));
+    Promise.resolve().then(() => setVisible(0));
     let cancelled = false;
     const timeouts: number[] = [];
     const schedule = (fn: () => void, ms: number) => {

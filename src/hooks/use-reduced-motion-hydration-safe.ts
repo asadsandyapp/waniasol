@@ -15,6 +15,11 @@ export function useReducedMotionHydrationSafe(): boolean {
   const [prefersReduced, setPrefersReduced] = useState(false);
 
   useEffect(() => {
+    if (typeof window.matchMedia !== "function") {
+      Promise.resolve().then(() => setMounted(true));
+      return;
+    }
+
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setPrefersReduced(mq.matches);
 

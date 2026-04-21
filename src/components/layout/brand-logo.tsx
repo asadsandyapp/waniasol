@@ -34,7 +34,7 @@ export function BrandLogo({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    queueMicrotask(() => setMounted(true));
+    Promise.resolve().then(() => setMounted(true));
   }, []);
 
   return (
